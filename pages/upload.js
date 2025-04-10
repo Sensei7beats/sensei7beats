@@ -20,10 +20,35 @@ export default function Upload() {
     setBeat({ ...beat, file: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Form submitted! (backend storage coming next)');
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = {
+    title: beat.title,
+    bpm: beat.bpm,
+    key: beat.key,
+    leasePrice: beat.leasePrice,
+    exclusivePrice: beat.exclusivePrice,
+    releaseDate: beat.releaseDate,
   };
+
+  try {
+    const res = await fetch('/api/upload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+    alert(data.message);
+  } catch (err) {
+    console.error('Upload error:', err);
+    alert('Upload failed!');
+  }
+};
+
 
   return (
     <div style={{ backgroundColor: '#111', color: '#fff', minHeight: '100vh', padding: '2rem' }}>
