@@ -49,7 +49,6 @@ export default function Upload() {
   }
 };
 
-
   return (
     <div style={{ backgroundColor: '#111', color: '#fff', minHeight: '100vh', padding: '2rem' }}>
       <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Upload New Beat</h2>
